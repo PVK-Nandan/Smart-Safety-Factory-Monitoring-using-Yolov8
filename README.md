@@ -74,11 +74,6 @@ yolo train model=yolov8n.pt data=data.yaml epochs=100 imgsz=640
 
 ---
 
-## 📸 Screenshots / Results
-(Add your prediction images here)
-
----
-
 ## 🤝 Contributing
 Feel free to contribute or improve the project by opening a pull request.
 
@@ -86,3 +81,4 @@ Feel free to contribute or improve the project by opening a pull request.
 
 ## 📝 License
 This project is open-source and free to use for research and development.
+
