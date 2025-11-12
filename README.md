@@ -1,88 +1,88 @@
-# PPE Detection for Construction Site Safety using YoloV8
-![Alt text](assets/videoconstruc2.gif)
-> 4,764 workers died on the job in 2020 (3.4 per 100,000 full-time equivalent workers). Workers in transportation and material moving occupations and construction and extraction occupations accounted for nearly half of all fatal occupational injuries (47.4 percent), representing 1,282 and 976 workplace deaths, respectively. 
->
-> *Occupational Safety and Health Administration (US Department of Labour)*
+# 🏭 Smart Safety Factory Monitoring using YOLOv8
 
+A real-time safety monitoring system built using **YOLOv8** to detect workers, machinery, and PPE compliance (helmets, vests, masks) inside factories and industrial environments.
 
-## Introduction
+This project helps improve workplace safety by automatically identifying safety rule violations and tracking worker activity.
 
-There have been various accidents in construction sites, due to the lack of safety equipments for workers. The aim of this project was to detect PPE on a worker, which can be further used for tracking and triggerring alarm (safety monitoring) in future. We use the dataset provided by Roboflow on [**Construction Site Safety Image Dataset**](https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety). 
+---
 
-For easier use the dataset is already uploaded here: [**Kaggle Dataset**](https://www.kaggle.com/datasets/snehilsanyal/construction-site-safety-image-dataset-roboflow).
+## 🚀 Features
+- ✔️ Real-time detection using YOLOv8  
+- ✔️ Detects workers, helmets, vests, masks, machinery, and vehicles  
+- ✔️ Flags safety rule violations (No-Helmet, No-Vest, No-Mask)  
+- ✔️ Uses custom-trained dataset with 10 classes  
+- ✔️ Supports image, video, and webcam detection  
+- ✔️ Easy to deploy in safety monitoring systems  
 
-The dataset consists of 2801 image samples with labels in YoloV8 format. These images are split into `train: 2605`, `valid: 114` and `test: 82` sets. Each folder consists of `images` and `labels` folders.
+---
 
-There are 10 classes to detect from the dataset: 
+## 🗂️ Dataset Classes
+- Person  
+- Helmet (Hardhat)  
+- Safety Vest  
+- Mask  
+- NO-Helmet  
+- NO-Vest  
+- NO-Mask  
+- Safety Cone  
+- Machinery  
+- Vehicle  
 
-**'Hardhat', 'Mask', 'NO-Hardhat', 'NO-Mask', 'NO-Safety Vest', 'Person', 'Safety Cone', 'Safety Vest', 'machinery', 'vehicle'**
+---
 
+## 🛠️ Installation
 
-![](assets/ppe.webp)
+### 1️⃣ Clone the Repository
+git clone https://github.com/PVK-Nandan/Smart-Safety-Factory-Monitoring-using-Yolov8.git  
+cd Smart-Safety-Factory-Monitoring-using-Yolov8
 
+### 2️⃣ Create a Virtual Environment (Optional but Recommended)
+python -m venv venv  
+venv\Scripts\activate  # Windows
 
-## Setup
+### 3️⃣ Install Dependencies
+pip install -r requirements.txt
 
-The code was run on Kaggle, with a P100 GPU. We installed the `ultralytics` library by [**Ultralytics**](https://docs.ultralytics.com) to run YoloV8 custom object detection on the dataset.
+---
 
-For more information check out this notebook: [**Check yo'self before you wreck yo'self - CSS EDA**](https://www.kaggle.com/code/snehilsanyal/check-yo-self-before-you-wreck-yo-self-css-eda). 
+## ▶️ Usage
 
-**Note:** This repository contains all the results, visualizations and best model after custom training on the dataset.
+### Run Inference on an Image
+python test_yolo.py --source path/to/image.jpg
 
-## File Hierarchy
+### Run on a Video
+python test_yolo.py --source path/to/video.mp4
 
-1. `data` folder consists of the yaml file required for training. It also contains 3 folders `train`, `valid` and `test`. Each of these folders have 2 subfolders `images` (with .jpg files) and `labels` (with .txt annotations).
-2. `results` folder consists of the prediction results of the model, confusion matrix plot, visualizations of the train and valid batches and PR curves.
-3. `models` folder consists of 2 models, `yolov8n.pt` which is the pre-trained model on COCO128.yaml and `best.pt` which is the custom trained yolov8n model on our dataset.
-4. `source_files` folder consists of videos and images for evaluation of our custom trained model.
-5. `output` folder consists of output produced by our custom object detection model after 100 epochs of training.
+### Run Live Webcam Detection
+python test_yolo.py --source 0
 
+---
 
+## 📂 Project Structure
+├── data.yaml               # Dataset configuration  
+├── models/                 # Trained YOLOv8 model weights  
+├── datasets/               # Training dataset  
+├── output/                 # Results and prediction images  
+├── test_yolo.py            # Script for testing YOLOv8 model  
+├── requirements.txt        # Dependencies  
+└── README.md  
 
-## Code
+---
 
-```
-├───.ipynb_checkpoints
-├───assets
-├───data
-├───├──data.yaml
-├───├──ppe_data.yaml
-│   ├───test
-│   │   ├───images
-│   │   └───labels
-│   ├───train
-│   │   ├───images
-│   │   └───labels
-│   └───valid
-│       ├───images
-│       └───labels
-├───models
-├───output
-│   └───output_yolov8n_100e
-├───results
-└───source_files
-```
+## 🧠 Training (Optional)
+yolo train model=yolov8n.pt data=data.yaml epochs=100 imgsz=640
 
-## Results
+---
 
-The training of YoloV8n model was done for 100 epochs and was completed in 2.719 hours. After training, we get the following results:
+## 📸 Screenshots / Results
+(Add your prediction images here)
 
-![Alt text](results/confusion_matrix.png)
+---
 
-![Alt text](results/train_batch14672.jpg)
+## 🤝 Contributing
+Feel free to contribute or improve the project by opening a pull request.
 
-![Alt text](results/val_batch2_pred.jpg)
+---
 
-![Alt text](results/results.png)
-
-## Outputs
-
-![Alt text](output/output_yolov8n_100e/construction-safety.jpg)
-![Alt text](output/output_yolov8n_100e/portrait-of-woman-with-mask-and-man-with-safety-glasses-on-a-construction-HX01FH.jpg)
-![Alt text](output/output_yolov8n_100e/two-young-construction-workers-wearing-555864.jpg)
-## Future Work
-
-1. Train the model for more epochs.
-2. Compare with 4 other models by YoloV8.
-3. Create ID tracking of workers and save bounding boxes of workers not wearing proper PPE.
-4. ML App deployment with alarm trigerring.
+## 📝 License
+This project is open-source and free to use for research and development.
